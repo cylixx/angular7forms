@@ -25,3 +25,41 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+------------------------------------------------------------
+**RESUME:**
+
+**Template Reference Variable**
+    Is often a reference to a DOM element within a template. It can also be a reference to an Angular component
+    or directive or a web component.
+  
+    You can simply use the hash symbol (#) to create a reference variable in your template which 
+    will be only available in that template.
+
+**  NgForm**
+    It's simply a directive exported from FormsModule which gets automatically added to all <form> tags 
+    in your Angular templates once you import the module.
+    example:    #myForm="ngForm"
+    properties:
+      myform.value: It will provides you with the aggregated form value of all the fields used in your <form> tag,
+      myform.valid: It will provides you with a boolean value indicating if the form is valid or not,
+      myform.touched: It will provides you with a boolean value indicating if the user has entered value at least in one field,
+      myform.submitted: It will provides with a boolean value indicating if the form was submitted.
+      
+**  ngModel: Two-way data binding**
+      Is the combination of both property binding and event binding along with the ngModel built-in directive
+      [(ngModel)] = "component-property"
+
+**  Built-in directives**
+      ngModel
+      ngIf - Is used for adding or removing elements from DOM dinamically
+             <element *ngIf="condition"> content </element>
+      ngFor
+      ngSwitch
+
+**  Built-in attribute directive**
+      ngStyle
+      ngClass
+
+

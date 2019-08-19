@@ -1,0 +1,23 @@
+<form>
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <!-- 
+      ngModel name="firstName"  -- simple forma ngModel sin data binding con el componente,
+                                    el atributo name es necesario para que pueda dsitinguir ese control object
+                                    Angular automaticamente crea una instancia de "formControl" class y asocia esta con el input flied
+      #firstName="ngModel"  -- Template variable ligada con el ngModel
+      (change)="log(firstName)"  -- Evento '(change)' que va ejecutar el metodo 'log(firstName)' que recibe como parametro la template variable 'firstName'
+    -->
+    <input required minlength="3" maxlength="10" pattern="banana" ngModel name="firstName" #firstName="ngModel" (change)="log(firstName)" id="firstName" type="text" class="form-control">
+    <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+      <div *ngIf="firstName.errors.required">First Name ir required</div>
+      <div *ngIf="firstName.errors.minlength">First Name sould be minimum {{ firstName.errors.minlength.requiredLength }} characters.</div>
+      <div *ngIf="firstName.errors.pattern">First Name doesn't match the pattern</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" form="comment">Comment</label>
+    <textarea ngModel name="comment" id="comment" cols="30" rows="10" class="form-control"></textarea>
+  </div>
+  <button class="btn btn-primary">Submit</button>
+</form>

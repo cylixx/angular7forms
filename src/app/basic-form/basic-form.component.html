@@ -1,0 +1,20 @@
+
+<form (ngSubmit)="onSubmit(form1)" #form1="ngForm">
+    <input type="text" [(ngModel)]="user.name" #name="ngModel" name="username" minlength="5" required>
+    <div *ngIf="name.invalid && (name.dirty || name.touched)">
+      <p *ngIf="name.hasError('required')">User name is required field</p>
+      <p *ngIf="name.hasError('minlength')">Minimun 6 characters are required</p>
+    </div>
+  
+    <ul>
+      <li *ngFor="let framework of frameworks">{{framework}}</li>
+    </ul>
+  
+    <input type="submit" name="submit" value="Submit" [disabled]="form1.invalid">
+  </form>
+  
+  <br>
+  <div class="dataclass">form1.value: {{form1.value | json}}</div>
+  <div class="dataclass">form1.valid: {{form1.valid}}</div>
+  
+  
