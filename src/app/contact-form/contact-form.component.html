@@ -8,16 +8,147 @@
       #firstName="ngModel"  -- Template variable ligada con el ngModel
       (change)="log(firstName)"  -- Evento '(change)' que va ejecutar el metodo 'log(firstName)' que recibe como parametro la template variable 'firstName'
     -->
-    <input required minlength="3" maxlength="10" pattern="banana" ngModel name="firstName" #firstName="ngModel" (change)="log(firstName)" id="firstName" type="text" class="form-control">
+    <input 
+        required 
+        minlength="3" 
+        maxlength="10" 
+        pattern="banana" 
+        ngModel 
+        name="firstName" 
+        #firstName="ngModel" 
+        (change)="log(firstName)" 
+        id="firstName" 
+        type="text" 
+        class="form-control">
     <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
       <div *ngIf="firstName.errors.required">First Name ir required</div>
       <div *ngIf="firstName.errors.minlength">First Name sould be minimum {{ firstName.errors.minlength.requiredLength }} characters.</div>
       <div *ngIf="firstName.errors.pattern">First Name doesn't match the pattern</div>
     </div>
   </div>
+
+  <!-- Two-way Binding and ngModel -->
+  <div class="form-group">
+      <label for="email">email</label>
+      <!-- Hace lo mismo pero no es lo mas eficiente -->
+      <!-- <input [value]="email" (keyup.enter)="email = $event.target.value; onkeyUp()" type="text"> -->
+      <!-- Usando two-way binding -->
+      <!-- <input [(ngModel)]="email" (keyup.enter)="onkeyUp()" name="email" > -->
+      <input [(ngModel)]="email" (keyup.enter)="log(email)" name="email" >
+  </div>    
+
+
+  <!-- Select with onCahnce example  --> 
+  <!-- <select (change)="onSelect($event.target.value)" [(ngModel)]="selectedCountry.id" name="contrySelect"> -->
+    <select (change)="onSelect($event)" [(ngModel)]="selectedCountry" name="contrySelect">
+      <!-- <option *ngFor="let country of countries" value= {{country.id}}> -->
+      <option *ngFor="let country of countries" [value]= "country.id">
+          {{country.name}}
+      </option>
+    </select>
+    <br/>
+    Selected Country ID: {{selectedCountry.id}} & Name: {{selectedCountry.name}}
+
   <div class="form-group">
     <label for="" form="comment">Comment</label>
-    <textarea ngModel name="comment" id="comment" cols="30" rows="10" class="form-control"></textarea>
+    <textarea ngModel name="comment" id="comment" cols="30" rows="2" class="form-control"></textarea>
   </div>
+
+
+  <!-- Directives 
+        * Structural - Modify the structure of the DOM  (*ngIf)
+        * Attribute - Modify the attributes of DOM elements
+
+  -->
+
+  <!-- ===============================================================================
+    ngIf - (Structural) Si se cumple la condición agrega el elemento al DOM, caso contrario no lo agrega   
+  -->
+  <br><br><h5>*ngIf</h5><br>
+  <!-- 1. con dos div's -->
+  <!--
+  <div *ngIf="courses.length > 0">
+    List of courses
+  </div> 
+  <div *ngIf="courses.length == 0">
+    No courses yet
+  </div>
+  -->
+
+  <!-- 2. con ng-template -->
+  <!--
+  <div *ngIf="courses.length > 0; else noCourses">
+    List of courses
+  </div> 
+  <ng-template #noCourses>
+    No courses yet
+  </ng-template>
+-->
+
+  <!-- 3. Con dos bloques ng-template  -->
+  <div *ngIf="courses.length > 0; then coursesList else noCourses"></div> 
+  <ng-template #coursesList>
+    List of courses
+  </ng-template>  
+  <ng-template #noCourses>
+    No courses yet
+  </ng-template>
+
+  <!-- 4. hidden attribute  -->
+  <!--
+  <div [hidden]="courses.length == 0">
+    List of courses
+  </div> 
+  <div [hidden]="courses.length > 0">
+    No courses yet
+  </div>
+  -->
+
+  <!-- ===============================================================================
+    ngSwitch   
+  -->
+  <br><br><h5>*ngSwitch</h5><br>
+
+  <ul class="nav nav-pills">
+    <li [class.active]="viewMode == 'map'"><a (click)="viewMode = 'map'">Map View</a></li>
+    <li [class.active]="viewMode == 'list'"><a (click)="viewMode = 'list'">List View</a></li>
+  </ul>
+  <div [ngSwitch]="viewMode">
+    <div *ngSwitchCase="'map'">Map View Content</div>
+    <div *ngSwitchCase="'list'">List View Content</div>
+    <div *ngSwitchDefault>Otherwise</div>
+  </div>
+
+  <!-- ===============================================================================
+    ngFor   
+  -->
+  <br><br><span>*ngFor</span><br>
+  <h5>*ngFor with an index</h5>
+  <ul>
+    <li *ngFor="let course of coursesData; index as i">
+      {{ i }} - {{ course.name }}
+    </li>
+  </ul>
+
+  <br>
+  <h5>*ngFor with an even</h5>
+  <ul>
+      <li *ngFor="let course of coursesData; even as isEven">
+        {{ course.name }} <span *ngIf="isEven">(EVEN)</span>
+      </li>
+    </ul>
+
+  <br>
+  <h5>*ngFor with add and remove</h5>
+  <button (click)="onAdd()">Add</button>
+  <ul>
+    <li *ngFor="let course of coursesData;">
+      {{ course.name }} 
+      <button (click)="onRemove(course)">Remove</button>
+      <button (click)="onUpdate(course)">Update</button>
+    </li>
+  </ul>
+
+  <br>
   <button class="btn btn-primary">Submit</button>
 </form>
