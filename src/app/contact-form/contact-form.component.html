@@ -13,6 +13,7 @@
         minlength="3" 
         maxlength="10" 
         pattern="banana" 
+        [(ngModel)]="contact.firstName"
         ngModel 
         name="firstName" 
         #firstName="ngModel" 
@@ -34,24 +35,32 @@
       <!-- <input [value]="email" (keyup.enter)="email = $event.target.value; onkeyUp()" type="text"> -->
       <!-- Usando two-way binding -->
       <!-- <input [(ngModel)]="email" (keyup.enter)="onkeyUp()" name="email" > -->
-      <input [(ngModel)]="email" (keyup.enter)="log(email)" name="email" >
+      <input [(ngModel)]="contact.email" (keyup.enter)="log(email)" name="email" >
   </div>    
 
 
   <!-- Select with onCahnce example  --> 
+  <div class="form-group">
+    <label for="country">Country</label>
   <!-- <select (change)="onSelect($event.target.value)" [(ngModel)]="selectedCountry.id" name="contrySelect"> -->
-    <select (change)="onSelect($event)" [(ngModel)]="selectedCountry" name="contrySelect">
+    <!-- <select id="country" name="country" (change)="onSelect($event)" [(ngModel)]="selectedCountry" > -->
+      <select id="country" name="country" (change)="onSelect($event)" [(ngModel)]="contact.country" class="form-control" >
       <!-- <option *ngFor="let country of countries" value= {{country.id}}> -->
       <option *ngFor="let country of countries" [value]= "country.id">
           {{country.name}}
       </option>
     </select>
-    <br/>
-    Selected Country ID: {{selectedCountry.id}} & Name: {{selectedCountry.name}}
+  </div> 
+
+   <!-- Selected Country ID: {{selectedCountry.id}} & Name: {{selectedCountry.name}} -->
 
   <div class="form-group">
     <label for="" form="comment">Comment</label>
-    <textarea ngModel name="comment" id="comment" cols="30" rows="2" class="form-control"></textarea>
+    <textarea ngModel name="comment" id="comment" [(ngModel)]="contact.comment" cols="30" rows="2" class="form-control"></textarea>
+  </div>
+
+  <div>
+    Form values: {{contact | json}}
   </div>
 
 
@@ -148,6 +157,11 @@
       <button (click)="onUpdate(course)">Update</button>
     </li>
   </ul>
+
+
+  <br><br>
+  <h5>Insert a component tag</h5>
+  <courses></courses>
 
   <br>
   <button class="btn btn-primary">Submit</button>

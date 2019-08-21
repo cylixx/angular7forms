@@ -1,4 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { CoursesComponent } from '../courses.component';
+
+
+export class Contact {
+  constructor(
+    public firstName: string,
+    public email: string,
+    public country: number,
+    public comment: string
+  ) {}
+}
 
 export class Country {
   constructor(
@@ -13,7 +24,6 @@ export class Country {
   styleUrls: ['./contact-form.component.css']
 })
 export class ContactFormComponent implements OnInit {
-  email = "me@example.com";
   courses = [1, 2, 3];
   viewMode = 'map';
   coursesData = [
@@ -23,8 +33,6 @@ export class ContactFormComponent implements OnInit {
   ];
 
   //select
-  //selectedCountry:Country = new Country(2, 'Mexico');
-  selectedCountry: Country = new Country(0, null);
   countries = [
      new Country(1, 'USA' ),
      new Country(2, 'Mexico' ),
@@ -32,9 +40,12 @@ export class ContactFormComponent implements OnInit {
      new Country(4, 'Brazil')
   ];
 
+  contact: Contact; //aqui mapeamos los valores del formulario
+
   constructor() { }
 
   ngOnInit() {
+    this.contact = new Contact('Marco', 'mhinojosa@domain.com', 2, 'El contacto ya estuvo aqui antes');
   }
 
   log(x) {
@@ -75,12 +86,12 @@ export class ContactFormComponent implements OnInit {
     }
   }
   */
- onSelect($event) {
-  console.log($event);
-  // let countryId = $event.target.value;
-  //console.log(countryId);
-}
-
+  onSelect($event) {
+    console.log($event);
+    let countryId = $event.target.value;
+    let labelSelected = $event.target[countryId - 1].label;
+    console.log("Country selected i[d = " + countryId + ", label = "+labelSelected+"]");
+  }
 
 
 }

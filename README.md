@@ -77,3 +77,13 @@ Built-in attribute directive | Column B |
  A3 | B3 |
 
 
+-----------------------------------------------------------------------------------------------------------
+## Two ways to create forms in Angular
+* Template Driven Forms
+* Reactive Forms (Also called Model Driven Forms)  (This is better offer more control)  
+
+## Classes for creating a form control tree
+* FormGroup
+* FormControl
+
+
