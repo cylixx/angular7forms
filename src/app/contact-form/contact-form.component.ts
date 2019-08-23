@@ -53,7 +53,7 @@ export class ContactFormComponent implements OnInit {
   }
 
   onkeyUp() {
-    console.log(this.email);
+    console.log(this.contact.email);
   }
 
   onAdd() {

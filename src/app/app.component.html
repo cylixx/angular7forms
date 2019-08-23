@@ -1,4 +1,21 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <!--  -->
-<router-outlet></router-outlet>
-
+<div class="container">
+  <nav class="navbar navbar-default">
+    <ul class="nav navbar-nav">
+      <li>
+        <a routerLinkActive="active" routerLink="basic">Basic Form</a>
+      </li>
+      <li>
+        <a routerLinkActive="active" routerLink="contact">Template Driven Forms</a>
+      </li>
+      <li>
+        <a routerLinkActive="active" routerLink="create">Create</a>
+      </li>
+      <li>
+        <a routerLinkActive="active" routerLink="list">List</a>
+      </li>
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
