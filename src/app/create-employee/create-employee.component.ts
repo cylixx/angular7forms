@@ -83,6 +83,11 @@ export class CreateEmployeeComponent implements OnInit {
    //   console.log(JSON.stringify(value));
     //});
 
+    //un observador para cuando cambie en formGroup contactPreference
+    this.employeeForm.get('contactPreference').valueChanges.subscribe((data: string) => {
+      this.onContactPreferenceChange(data);
+    });
+
     this.employeeForm.valueChanges.subscribe((data) => {
       this.logValidationErrors(this.employeeForm);
     });
@@ -91,11 +96,15 @@ export class CreateEmployeeComponent implements OnInit {
 
   onContactPreferenceChange(selectedValue: string) {
     const phoneControl = this.employeeForm.get('phone');
+    const emailControl = this.employeeForm.get('email');
     if (selectedValue === 'phone') {
+      emailControl.clearValidators();
       phoneControl.setValidators(Validators.required)
     } else {
       phoneControl.clearValidators();
+      emailControl.setValidators(Validators.required)
     }
+    emailControl.updateValueAndValidity();
     phoneControl.updateValueAndValidity();
   }
 
