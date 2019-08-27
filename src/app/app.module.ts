@@ -8,6 +8,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { BasicFormComponent } from './basic-form/basic-form.component';
 import { CoursesComponent } from './courses.component';
 import { CreateEmployeeComponent } from './create-employee/create-employee.component';
+import { HeroFormComponent } from './hero-form/hero-form.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CreateEmployeeComponent } from './create-employee/create-employee.compo
     ContactFormComponent,
     BasicFormComponent,
     CoursesComponent,
-    CreateEmployeeComponent
+    CreateEmployeeComponent,
+    HeroFormComponent
   ],
   imports: [
     BrowserModule,
